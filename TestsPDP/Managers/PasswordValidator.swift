@@ -23,7 +23,7 @@ class PasswordValidator {
 
     // MARK: -
 
-    private func hasUpperCaseCharacter(text: String) -> Bool {
+    func hasUpperCaseCharacter(text: String) -> Bool {
         for character in text where character.isUppercase {
             return true
         }
@@ -31,7 +31,7 @@ class PasswordValidator {
         return false
     }
 
-    private func hasUnderscore(text: String) -> Bool {
+    func hasUnderscore(text: String) -> Bool {
         for character in text where character == "_" {
             return true
         }
@@ -39,7 +39,7 @@ class PasswordValidator {
         return false
     }
 
-    private func isValidLenght(text: String) -> Bool {
+    func isValidLenght(text: String) -> Bool {
         return text.count > 6 && text.count < 20
     }
 
