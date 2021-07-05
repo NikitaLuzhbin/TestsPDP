@@ -77,4 +77,23 @@ class TestsPDPTests: XCTestCase {
         XCTAssertTrue(self.passwordValidator.hasUpperCaseCharacter(text: uppercaseInMiddle))
         XCTAssertFalse(self.passwordValidator.hasUpperCaseCharacter(text: noUppercase))
     }
+
+    func testAsynchronousMethod() throws {
+        let validatorExpectation = expectation(description: "validatorExpectation")
+        var stringToRecieve: String?
+
+        self.passwordValidator.asynchronousMethod(complition: { string in
+            stringToRecieve = string
+
+            validatorExpectation.fulfill()
+        })
+
+        waitForExpectations(timeout: 2.0, handler: { error in
+            if error != nil {
+                XCTFail()
+            }
+
+            XCTAssertTrue(stringToRecieve != nil)
+        })
+    }
 }

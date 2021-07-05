@@ -43,5 +43,13 @@ class PasswordValidator {
         return text.count > 6 && text.count < 20
     }
 
+    func asynchronousMethod(complition: @escaping (String) -> Void) {
+        DispatchQueue.global().asyncAfter(deadline: .now() + 1.5) {
+            DispatchQueue.main.async {
+                complition("Some String")
+            }
+        }
+    }
+
     private init() { }
 }
