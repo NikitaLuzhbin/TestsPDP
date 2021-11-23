@@ -6,6 +6,7 @@
 //
 
 import XCTest
+import SnapshotTesting
 
 class TestsPDPUITests: XCTestCase {
 
@@ -18,12 +19,20 @@ class TestsPDPUITests: XCTestCase {
     }
 
     func testLogInButtonEnabled() throws {
+        
+        // 1
+        
         let app = XCUIApplication()
-        app.launch()
 
         let login = "qwerty"
         let password = "!Qwerty_"
         let shouldLoginButtonBeEnabled = true
+        let expectedResult = true
+        var actualResult: Bool?
+
+        // 2
+
+        app.launch()
 
         let loginTextField = app.textFields["loginTextField"]
 
@@ -37,6 +46,10 @@ class TestsPDPUITests: XCTestCase {
 
         let logInButton = app.buttons["loginButton"]
 
-        XCTAssert(logInButton.isEnabled == shouldLoginButtonBeEnabled)
+        actualResult = logInButton.isEnabled == shouldLoginButtonBeEnabled
+
+        // 3
+
+        XCTAssertEqual(expectedResult, actualResult)
     }
 }

@@ -79,8 +79,12 @@ class TestsPDPTests: XCTestCase {
     }
 
     func testAsynchronousMethod() throws {
+        // 1
+
         let validatorExpectation = expectation(description: "validatorExpectation")
         var stringToRecieve: String?
+
+        // 2
 
         self.passwordValidator.asynchronousMethod(complition: { string in
             stringToRecieve = string
@@ -88,12 +92,16 @@ class TestsPDPTests: XCTestCase {
             validatorExpectation.fulfill()
         })
 
-        waitForExpectations(timeout: 2.0, handler: { error in
-            if error != nil {
-                XCTFail()
-            }
+        // 3
 
-            XCTAssertTrue(stringToRecieve != nil)
-        })
+        wait(for: [validatorExpectation], timeout: 10.0)
+
+        XCTAssertTrue(stringToRecieve != nil)
     }
 }
+
+// Snapshot tests
+// MOCK, PARTIAL MOCK
+// Refactor all
+// func fetchUsers() ||
+// test coverage
